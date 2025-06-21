@@ -59,6 +59,6 @@ if generate:
     # Display images in a single row
     fig, axs = plt.subplots(1, 5, figsize=(10, 2))
     for i in range(5):
-        axs[i].imshow((images[i][0] + 1) / 2, cmap="gray")
+        axs[i].imshow(images[i][0], cmap="gray")
         axs[i].axis("off")
     st.pyplot(fig)
