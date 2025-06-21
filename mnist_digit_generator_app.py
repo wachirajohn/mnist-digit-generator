@@ -4,7 +4,6 @@ import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Constants
 z_dim = 100
 num_classes = 10
 image_size = 28
