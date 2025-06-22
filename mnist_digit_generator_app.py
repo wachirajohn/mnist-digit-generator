@@ -11,7 +11,7 @@ model_path = "models/mnist_generator.pth"
 device = torch.device("cpu")
 
 
-# FIXED Generator Model - Must match training exactly!
+# Generator Model - Must match training exactly!
 class Generator(nn.Module):
     def __init__(self, z_dim, num_classes):
         super().__init__()
@@ -53,7 +53,7 @@ def generate_images(model, digit, num_images=5):
     with torch.no_grad():
         generated = model(noise, labels).cpu().numpy()
 
-    # Convert from (-1, 1) to (0, 1) range for display
+    # ✅ Convert from (-1, 1) to (0, 1) range for display
     generated = (generated + 1) / 2
     generated = np.clip(generated, 0, 1)  # Ensure valid range
 
