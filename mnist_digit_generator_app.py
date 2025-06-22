@@ -12,7 +12,7 @@ model_path = "models/mnist_generator.pth"
 device = torch.device("cpu")
 
 
-# ✅ Generator Model - EXACTLY matching your training code
+# Generator Model - EXACTLY matching your training code
 class Generator(nn.Module):
     def __init__(self, z_dim, num_classes):
         super().__init__()
@@ -37,7 +37,7 @@ class Generator(nn.Module):
         return out.view(-1, 1, image_size, image_size)
 
 
-# ✅ Enhanced model loading with error handling
+# Enhanced model loading with error handling
 @st.cache_resource
 def load_model():
     try:
@@ -79,7 +79,7 @@ def load_model():
         return None
 
 
-# ✅ Generate digit images
+# Generate digit images
 def generate_images(model, digit, num_images=5):
     if model is None:
         return None
@@ -112,23 +112,13 @@ def debug_model_structure():
 # Streamlit UI
 st.title("Handwritten Digit Generator (MNIST)")
 
-# Debug section
-with st.expander("Debug Information"):
-    st.write(f"**Model path:** {model_path}")
-    st.write(f"**Model exists:** {os.path.exists(model_path)}")
-    st.write(f"**Device:** {device}")
-    debug_model_structure()
-
-# Main interface
 digit = st.selectbox("Select a digit to generate (0–9):", list(range(10)))
 
 if st.button("Generate 5 Samples"):
-    with st.spinner("Loading model..."):
-        model = load_model()
+    model = load_model()
 
     if model is not None:
-        with st.spinner("Generating images..."):
-            images = generate_images(model, digit)
+        images = generate_images(model, digit)
 
         if images is not None:
             # Display images
@@ -145,10 +135,3 @@ if st.button("Generate 5 Samples"):
             st.error("Failed to generate images")
     else:
         st.error("Cannot generate images without a valid model")
-
-# Instructions
-st.markdown("---")
-st.markdown("### Instructions:")
-st.markdown("1. Make sure `models/mnist_generator.pth` exists")
-st.markdown("2. The model must be trained with BatchNorm layers")
-st.markdown("3. Select a digit (0-9) and click 'Generate 5 Samples'")
